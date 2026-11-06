@@ -52,7 +52,7 @@ export async function googleConnection(): Promise<GoogleConnection> {
 export async function saveGoogleAccount({ email, refreshToken, scopes }: { email: string; refreshToken: string | undefined; scopes: string }) {
   const existing = await loadGoogleAccount();
   const refreshTokenEnc = refreshToken ? encryptSecret(GOOGLE_TOKEN, refreshToken) : existing?.refreshTokenEnc;
-  if (!refreshTokenEnc) throw new GoogleError("rejected", "Google didn't give Dossier lasting access. Remove Dossier at myaccount.google.com/permissions and connect again.");
+  if (!refreshTokenEnc) throw new GoogleError("rejected", "Google didn't give YaminiJobApp lasting access. Remove YaminiJobApp at myaccount.google.com/permissions and connect again.");
   // Another account replaces the old one, and its sync starts afresh.
   const sameAccount = existing?.email.toLowerCase() === email.toLowerCase();
   const merged = sameAccount ? [...new Set([...existing!.scopes.split(/\s+/), ...scopes.split(/\s+/)])].filter(Boolean).join(" ") : scopes;
@@ -86,7 +86,7 @@ export async function accessToken(group: ScopeGroup, signal?: AbortSignal): Prom
   const account = await loadGoogleAccount();
   if (!account) throw new GoogleError("not-connected", "Connect your Google account in Settings → Google first.");
   if (!hasScopes(account.scopes, group)) {
-    throw new GoogleError("scope", "Dossier doesn't have that permission yet. Allow it in Settings → Google.");
+    throw new GoogleError("scope", "YaminiJobApp doesn't have that permission yet. Allow it in Settings → Google.");
   }
   const cached = tokens.get(ACCOUNT_ID);
   if (cached && cached.expires > Date.now() + 60_000) return cached.token;
@@ -102,7 +102,7 @@ export async function accessToken(group: ScopeGroup, signal?: AbortSignal): Prom
 }
 
 const MAX_BYTES = 30 * 1024 * 1024;
-const SLOW_DOWN = "Google asks Dossier to slow down. Try again in a few minutes.";
+const SLOW_DOWN = "Google asks YaminiJobApp to slow down. Try again in a few minutes.";
 /** Before the second, third and fourth try, when the error passes (public issue 68). */
 const RETRY_DELAYS_MS = [1000, 3000, 9000];
 
@@ -172,7 +172,7 @@ async function googleFetchOnce<T>(
   const path = new URL(url).pathname;
   if (response.status === 401) {
     tokens.delete(ACCOUNT_ID);
-    throw new GoogleError("revoked", "Google no longer accepts Dossier's access. Connect your Google account again.", `${path}: 401`);
+    throw new GoogleError("revoked", "Google no longer accepts YaminiJobApp's access. Connect your Google account again.", `${path}: 401`);
   }
   if (response.status === 403) {
     // Gmail says 403 for its per-user rate limit too, not only for a missing permission: the reason tells them apart.

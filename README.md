@@ -2,7 +2,9 @@
   <img src="src/app/icon.svg" alt="" width="80" height="80">
 </p>
 
-<h1 align="center">Dossier</h1>
+<h1 align="center">YaminiJobApp</h1>
+
+<p align="center"><strong>A customized copy of <a href="https://github.com/AienTech/dossier">Dossier</a>. To run it on your computer, see <a href="LOCAL.md">LOCAL.md</a>.</strong></p>
 
 <p align="center">
   Your job search, on your own server: one profile, a tailored resume and cover letter for every job, and every application tracked from draft to offer.

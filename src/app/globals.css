@@ -31,15 +31,15 @@
   /* Disabled and decorative only: never for text people need to read. */
   --color-faint: light-dark(#a29d94, #6e6961);
 
-  /* Primary actions: near-black, and near-white in the dark scheme, with
+  /* Primary actions: YaminiJobApp blue, lighter in the dark scheme, with
      on-primary text at 4.5:1 or more. primary-text is for text and icons
      marking a choice, e.g. a selected chip's label. */
-  --color-primary: light-dark(#222222, #ebe7df);
-  --color-primary-hover: light-dark(#3a3936, #ffffff);
-  --color-on-primary: light-dark(#fbfaf7, #1d1c1a);
-  --color-primary-text: light-dark(#1d1c1a, #f0ede7);
+  --color-primary: light-dark(#2563eb, #60a5fa);
+  --color-primary-hover: light-dark(#1d4ed8, #93c5fd);
+  --color-on-primary: light-dark(#ffffff, #0b1220);
+  --color-primary-text: light-dark(#1d4ed8, #93c5fd);
   /* Focus rings: 3:1 against every surface. */
-  --color-focus: light-dark(#1d1c1a, #f0ede7);
+  --color-focus: light-dark(#2563eb, #60a5fa);
 
   /* Toasts and tooltips: a dark chip, a little raised in the dark scheme. */
   --color-inverse: light-dark(#222222, #3b3834);
