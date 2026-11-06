@@ -16,8 +16,9 @@ die() { printf '\n\033[1;31mError:\033[0m %s\n' "$*" >&2; exit 1; }
 
 # --- Node.js 24+ (the app uses Node's built-in argon2) ----------------------
 command -v node >/dev/null || die "Node.js isn't installed. Install Node.js 24 or newer from https://nodejs.org."
-NODE_MAJOR="$(node -p 'process.versions.node.split(".")[0]')"
-[ "$NODE_MAJOR" -ge 24 ] || die "Node.js $(node -v) is too old. Install Node.js 24 or newer from https://nodejs.org."
+# crypto.argon2 arrived in Node.js 24.7.0; test for it rather than the version.
+node -e 'process.exit(typeof require("node:crypto").argon2 === "function" ? 0 : 1)' \
+  || die "Node.js $(node -v) is too old: YaminiJobApp needs 24.7 or newer. Install the latest Node.js 24 LTS from https://nodejs.org (or: nvm install 24), open a new terminal, and run this again."
 
 say "Enabling Yarn through Corepack"
 corepack enable || { npm install -g corepack && corepack enable; }

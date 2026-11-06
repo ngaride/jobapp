@@ -4,7 +4,7 @@ YaminiJobApp is a customized copy of [Dossier](https://github.com/AienTech/dossi
 
 ## Requirements
 
-- **Node.js 24 or newer** (https://nodejs.org). Older versions won't work: the app uses Node 24's built-in password hashing.
+- **Node.js 24.7 or newer** (https://nodejs.org, the 24 LTS). Older versions won't work: the app uses Node's built-in argon2 password hashing, added in 24.7.
 - **Ollama** (https://ollama.com), for the free local AI. Optional: you can pick a hosted AI (OpenAI, Anthropic, Mistral) in Settings → AI provider instead.
 - macOS or Linux, or Windows with WSL or Git Bash, to run the setup script.
 
